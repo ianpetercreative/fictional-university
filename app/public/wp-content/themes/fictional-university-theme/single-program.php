@@ -26,7 +26,7 @@
 
             <?php
                 $today = date('Ymd');
-                $homepageEvents = new WP_Query(array(
+                $relatedEvents = new WP_Query(array(
                     'posts_per_page' => 2,
                     'post_type' => 'event',
                     'meta_key' => 'event_date',
@@ -47,8 +47,8 @@
                     )
                 )); 
 
-                while($homepageEvents->have_posts()) {
-                    $homepageEvents->the_post(); ?>
+                while($relatedEvents->have_posts()) {
+                    $relatedEvents->the_post(); ?>
                     <div class="event-summary">
                         <a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
                             <span class="event-summary__month">
