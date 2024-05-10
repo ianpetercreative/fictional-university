@@ -1227,7 +1227,11 @@ class WP_Theme_JSON {
 			);
 
 			foreach ( $base_styles_nodes as $base_style_node ) {
+<<<<<<< HEAD
 				$stylesheet .= $this->get_layout_styles( $base_style_node, $types );
+=======
+				$stylesheet .= $this->get_layout_styles( $base_style_node );
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 			}
 		}
 
@@ -1388,6 +1392,7 @@ class WP_Theme_JSON {
 	 *
 	 * @since 6.1.0
 	 * @since 6.3.0 Reduced specificity for layout margin rules.
+<<<<<<< HEAD
 	 * @since 6.5.1 Only output rules referencing content and wide sizes when values exist.
 	 * @since 6.5.3 Add types parameter to check if only base layout styles are needed.
 	 *
@@ -1396,6 +1401,13 @@ class WP_Theme_JSON {
 	 * @return string Layout styles for the block.
 	 */
 	protected function get_layout_styles( $block_metadata, $types = array() ) {
+=======
+	 *
+	 * @param array $block_metadata Metadata about the block to get styles for.
+	 * @return string Layout styles for the block.
+	 */
+	protected function get_layout_styles( $block_metadata ) {
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 		$block_rules = '';
 		$block_type  = null;
 
@@ -1545,17 +1557,21 @@ class WP_Theme_JSON {
 					foreach ( $base_style_rules as $base_style_rule ) {
 						$declarations = array();
 
+<<<<<<< HEAD
 						// Skip outputting base styles for flow and constrained layout types if theme doesn't support theme.json. The 'base-layout-styles' type flags this.
 						if ( in_array( 'base-layout-styles', $types, true ) && ( 'default' === $layout_definition['name'] || 'constrained' === $layout_definition['name'] ) ) {
 							continue;
 						}
 
+=======
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 						if (
 							isset( $base_style_rule['selector'] ) &&
 							preg_match( $layout_selector_pattern, $base_style_rule['selector'] ) &&
 							! empty( $base_style_rule['rules'] )
 						) {
 							foreach ( $base_style_rule['rules'] as $css_property => $css_value ) {
+<<<<<<< HEAD
 								// Skip rules that reference content size or wide size if they are not defined in the theme.json.
 								if (
 									is_string( $css_value ) &&
@@ -1566,6 +1582,8 @@ class WP_Theme_JSON {
 									continue;
 								}
 
+=======
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 								if ( static::is_safe_css_declaration( $css_property, $css_value ) ) {
 									$declarations[] = array(
 										'name'  => $css_property,

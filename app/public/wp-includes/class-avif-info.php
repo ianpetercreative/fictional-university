@@ -175,7 +175,11 @@ class Features {
         if ( $tile->parent_item_id != $target_item_id ) {
           continue;
         }
+<<<<<<< HEAD
         $status = $this->get_item_features( $tile->tile_item_id, $tile_depth + 1 );
+=======
+        $status = get_item_features( $tile->tile_item_id, $tile_depth + 1 );
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
         if ( $status != NOT_FOUND ) {
           return $status;
         }

@@ -1105,6 +1105,7 @@
 	 *
 	 * @since 6.5.0
 	 *
+<<<<<<< HEAD
 	 * @param {Object} response            Response from the server.
 	 * @param {string} response.slug       Slug of the activated plugin.
 	 * @param {string} response.pluginName Name of the activated plugin.
@@ -1113,11 +1114,21 @@
 	wp.updates.activatePluginSuccess = function( response ) {
 		var $message = $( '.plugin-card-' + response.slug + ', #plugin-information-footer' ).find( '.activating-message' ),
 			isInModal = 'plugin-information-footer' === $message.parent().attr( 'id' ),
+=======
+	 * @param {Object} response             Response from the server.
+	 * @param {string} response.slug        Slug of the activated plugin.
+	 * @param {string} response.pluginName  Name of the activated plugin.
+	 * @param {string} response.plugin      The plugin file, relative to the plugins directory.
+	 */
+	wp.updates.activatePluginSuccess = function( response ) {
+		var $message = $( '.plugin-card-' + response.slug + ', #plugin-information-footer' ).find( '.activating-message' ),
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 			buttonText = _x( 'Activated!', 'plugin' ),
 			ariaLabel = sprintf(
 				/* translators: %s: The plugin name. */
 				'%s activated successfully.',
 				response.pluginName
+<<<<<<< HEAD
 			),
 			noticeData = {
 				id: 'plugin-activated-successfully',
@@ -1132,6 +1143,11 @@
 			noticeTarget;
 
 		wp.a11y.speak( __( 'Activation completed successfully. Some changes may not occur until you refresh the page.' ) );
+=======
+			);
+
+		wp.a11y.speak( __( 'Activation completed successfully.' ) );
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 		$document.trigger( 'wp-plugin-activate-success', response );
 
 		$message
@@ -1140,7 +1156,11 @@
 			.attr( 'aria-label', ariaLabel )
 			.text( buttonText );
 
+<<<<<<< HEAD
 		if ( isInModal ) {
+=======
+		if ( 'plugin-information-footer' === $message.parent().attr( 'id' ) ) {
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 			wp.updates.setCardButtonStatus(
 				{
 					status: 'activated-plugin',
@@ -1151,6 +1171,7 @@
 					ariaLabel: ariaLabel
 				}
 			);
+<<<<<<< HEAD
 
 			// Add a notice to the modal's footer.
 			$message.replaceWith( wp.updates.adminNotice( noticeData ) );
@@ -1171,6 +1192,15 @@
 
 		setTimeout( function() {
 			if ( isInModal ) {
+=======
+		}
+
+		setTimeout( function() {
+			$message.removeClass( 'activated-message' )
+			.text( _x( 'Active', 'plugin' ) );
+
+			if ( 'plugin-information-footer' === $message.parent().attr( 'id' ) ) {
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 				wp.updates.setCardButtonStatus(
 					{
 						status: 'plugin-active',
@@ -1184,8 +1214,11 @@
 						)
 					}
 				);
+<<<<<<< HEAD
 			} else {
 				$message.removeClass( 'activated-message' ).text( _x( 'Active', 'plugin' ) );
+=======
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 			}
 		}, 1000 );
 	};
@@ -3253,11 +3286,14 @@
 				return;
 			}
 
+<<<<<<< HEAD
 			if ( 'undefined' !== typeof message.id && 'plugin-activated-successfully' === message.id ) {
 				wp.updates.addAdminNotice( message );
 				return;
 			}
 
+=======
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 			if (
 				'undefined' !== typeof message.status &&
 				'undefined' !== typeof message.slug &&
@@ -3490,6 +3526,7 @@
 				} );
 			}
 		);
+<<<<<<< HEAD
 
 		/**
 		 * Click handler for page refresh link.
@@ -3507,5 +3544,7 @@
 				window.parent.location.reload();
 			}
 		} );
+=======
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 	} );
 })( jQuery, window.wp, window._wpUpdatesSettings );

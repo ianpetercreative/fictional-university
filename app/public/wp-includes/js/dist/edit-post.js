@@ -3490,6 +3490,7 @@ function areMetaBoxesInitialized(state) {
  * @return {Object?} Post Template.
  */
 const getEditedPostTemplate = (0,external_wp_data_namespaceObject.createRegistrySelector)(select => () => {
+<<<<<<< HEAD
   const {
     id: postId,
     type: postType,
@@ -3512,22 +3513,40 @@ const getEditedPostTemplate = (0,external_wp_data_namespaceObject.createRegistry
   const currentTemplate = select(external_wp_editor_namespaceObject.store).getEditedPostAttribute('template');
   if (currentTemplate) {
     const templateWithSameSlug = getEntityRecords('postType', 'wp_template', {
+=======
+  const currentTemplate = select(external_wp_editor_namespaceObject.store).getEditedPostAttribute('template');
+  if (currentTemplate) {
+    const templateWithSameSlug = select(external_wp_coreData_namespaceObject.store).getEntityRecords('postType', 'wp_template', {
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
       per_page: -1
     })?.find(template => template.slug === currentTemplate);
     if (!templateWithSameSlug) {
       return templateWithSameSlug;
     }
+<<<<<<< HEAD
     return getEditedEntityRecord('postType', 'wp_template', templateWithSameSlug.id);
   }
+=======
+    return select(external_wp_coreData_namespaceObject.store).getEditedEntityRecord('postType', 'wp_template', templateWithSameSlug.id);
+  }
+  const post = select(external_wp_editor_namespaceObject.store).getCurrentPost();
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
   let slugToCheck;
   // In `draft` status we might not have a slug available, so we use the `single`
   // post type templates slug(ex page, single-post, single-product etc..).
   // Pages do not need the `single` prefix in the slug to be prioritized
   // through template hierarchy.
+<<<<<<< HEAD
   if (slug) {
     slugToCheck = postType === 'page' ? `${postType}-${slug}` : `single-${postType}-${slug}`;
   } else {
     slugToCheck = postType === 'page' ? 'page' : `single-${postType}`;
+=======
+  if (post.slug) {
+    slugToCheck = post.type === 'page' ? `${post.type}-${post.slug}` : `single-${post.type}-${post.slug}`;
+  } else {
+    slugToCheck = post.type === 'page' ? 'page' : `single-${post.type}`;
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
   }
   const defaultTemplateId = select(external_wp_coreData_namespaceObject.store).getDefaultTemplateId({
     slug: slugToCheck
