@@ -723,7 +723,6 @@ function _wp_build_title_and_description_for_taxonomy_block_template( $taxonomy,
 }
 
 /**
-<<<<<<< HEAD
  * Builds a block template object from a post object.
  *
  * This is a helper function that creates a block template object from a given post object.
@@ -782,8 +781,6 @@ function _build_block_template_object_from_post_object( $post, $terms = array(),
 }
 
 /**
-=======
->>>>>>> c28ef874e9db8a2b93eece601164e34752635024
  * Builds a unified template object based a post Object.
  *
  * @since 5.9.0
@@ -795,22 +792,15 @@ function _build_block_template_object_from_post_object( $post, $terms = array(),
  * @return WP_Block_Template|WP_Error Template or error object.
  */
 function _build_block_template_result_from_post( $post ) {
-<<<<<<< HEAD
-=======
 	$default_template_types = get_default_block_template_types();
 
->>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 	$post_id = wp_is_post_revision( $post );
 	if ( ! $post_id ) {
 		$post_id = $post;
 	}
-<<<<<<< HEAD
 	$parent_post     = get_post( $post_id );
 	$post->post_name = $parent_post->post_name;
 	$post->post_type = $parent_post->post_type;
-=======
-	$parent_post = get_post( $post_id );
->>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 
 	$terms = get_the_terms( $parent_post, 'wp_theme' );
 
@@ -822,11 +812,9 @@ function _build_block_template_result_from_post( $post ) {
 		return new WP_Error( 'template_missing_theme', __( 'No theme is defined for this template.' ) );
 	}
 
-<<<<<<< HEAD
 	$terms = array(
 		'wp_theme' => $terms[0]->name,
 	);
-=======
 	$theme          = $terms[0]->name;
 	$template_file  = _get_block_template_file( $post->post_type, $post->post_name );
 	$has_theme_file = get_stylesheet() === $theme && null !== $template_file;
@@ -858,12 +846,10 @@ function _build_block_template_result_from_post( $post ) {
 	if ( 'wp_template' === $parent_post->post_type && isset( $default_template_types[ $template->slug ] ) ) {
 		$template->is_custom = false;
 	}
->>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 
 	if ( 'wp_template_part' === $parent_post->post_type ) {
 		$type_terms = get_the_terms( $parent_post, 'wp_template_part_area' );
 		if ( ! is_wp_error( $type_terms ) && false !== $type_terms ) {
-<<<<<<< HEAD
 			$terms['wp_template_part_area'] = $type_terms[0]->name;
 		}
 	}
@@ -879,12 +865,10 @@ function _build_block_template_result_from_post( $post ) {
 		return $template;
 	}
 
-=======
 			$template->area = $type_terms[0]->name;
 		}
 	}
 
->>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 	// Check for a block template without a description and title or with a title equal to the slug.
 	if ( 'wp_template' === $parent_post->post_type && empty( $template->description ) && ( empty( $template->title ) || $template->title === $template->slug ) ) {
 		$matches = array();
@@ -1536,7 +1520,6 @@ function get_template_hierarchy( $slug, $is_custom = false, $template_prefix = '
  * @since 6.5.0
  * @access private
  *
-<<<<<<< HEAD
  * @param stdClass        $changes    An object representing a template or template part
  *                                    prepared for inserting or updating the database.
  * @param WP_REST_Request $deprecated Deprecated. Not used.
@@ -1595,45 +1578,13 @@ function inject_ignored_hooked_blocks_metadata_attributes( $changes, $deprecated
 	if ( is_wp_error( $template ) ) {
 		return $template;
 	}
-=======
- * @param stdClass        $post    An object representing a template or template part
- *                                 prepared for inserting or updating the database.
- * @param WP_REST_Request $request Request object.
- * @return stdClass The updated object representing a template or template part.
- */
-function inject_ignored_hooked_blocks_metadata_attributes( $post, $request ) {
-	$filter_name = current_filter();
-	if ( ! str_starts_with( $filter_name, 'rest_pre_insert_' ) ) {
-		return $post;
-	}
-	$post_type = str_replace( 'rest_pre_insert_', '', $filter_name );
-
-	$hooked_blocks = get_hooked_blocks();
-	if ( empty( $hooked_blocks ) && ! has_filter( 'hooked_block_types' ) ) {
-		return $post;
-	}
-
-	// At this point, the post has already been created.
-	// We need to build the corresponding `WP_Block_Template` object as context argument for the visitor.
-	// To that end, we need to suppress hooked blocks from getting inserted into the template.
-	add_filter( 'hooked_block_types', '__return_empty_array', 99999, 0 );
-	$template = $request['id'] ? get_block_template( $request['id'], $post_type ) : null;
-	remove_filter( 'hooked_block_types', '__return_empty_array', 99999 );
->>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 
 	$before_block_visitor = make_before_block_visitor( $hooked_blocks, $template, 'set_ignored_hooked_blocks_metadata' );
 	$after_block_visitor  = make_after_block_visitor( $hooked_blocks, $template, 'set_ignored_hooked_blocks_metadata' );
 
-<<<<<<< HEAD
-	$blocks                = parse_blocks( $changes->post_content );
-	$changes->post_content = traverse_and_serialize_blocks( $blocks, $before_block_visitor, $after_block_visitor );
-
-	return $changes;
-=======
 	$blocks  = parse_blocks( $post->post_content );
 	$content = traverse_and_serialize_blocks( $blocks, $before_block_visitor, $after_block_visitor );
 
 	$post->post_content = $content;
 	return $post;
->>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 }
