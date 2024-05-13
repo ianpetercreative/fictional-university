@@ -989,13 +989,10 @@ function load_plugin_textdomain( $domain, $deprecated = false, $plugin_rel_path 
 	/** @var WP_Textdomain_Registry $wp_textdomain_registry */
 	global $wp_textdomain_registry;
 
-<<<<<<< HEAD
 	if ( ! is_string( $domain ) ) {
 		return false;
 	}
 
-=======
->>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 	/**
 	 * Filters a plugin's locale.
 	 *
