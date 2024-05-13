@@ -1041,6 +1041,13 @@ function load_muplugin_textdomain( $domain, $mu_plugin_rel_path = '' ) {
 	/** @var WP_Textdomain_Registry $wp_textdomain_registry */
 	global $wp_textdomain_registry;
 
+<<<<<<< HEAD
+	if ( ! is_string( $domain ) ) {
+		return false;
+	}
+
+=======
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 	/** This filter is documented in wp-includes/l10n.php */
 	$locale = apply_filters( 'plugin_locale', determine_locale(), $domain );
 
@@ -1080,6 +1087,13 @@ function load_theme_textdomain( $domain, $path = false ) {
 	/** @var WP_Textdomain_Registry $wp_textdomain_registry */
 	global $wp_textdomain_registry;
 
+<<<<<<< HEAD
+	if ( ! is_string( $domain ) ) {
+		return false;
+	}
+
+=======
+>>>>>>> c28ef874e9db8a2b93eece601164e34752635024
 	/**
 	 * Filters a theme's locale.
 	 *
